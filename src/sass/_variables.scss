@@ -1,0 +1,22 @@
+$primary-color: #262421;
+$primary-light: lighten($primary-color, 20%);
+$primary-dark: darken($primary-color, 20%);
+
+$neutral-light: #f5f5f5;
+$neutral-dark: #707070;
+
+$secondary-color: #d3d3d3;
+
+$text-color: $neutral-light;
+$background-color: $primary-color;
+
+$accent-color-1: adjust-hue($primary-color, 30deg);
+$accent-color-2: adjust-hue($primary-color, -30deg);
+
+$font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
+$font-size: 16px;
+$heading-font-weight: bold;
+
+$header-height: 30px;
+$border-color: $neutral-dark;
+$box-shadow-color: rgba($primary-dark, 0.25);

@@ -1,0 +1,20 @@
+.base-header {
+  @include flex-center;
+  background-color: $secondary-color;
+  width: 100%;
+  height: $header-height;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 15px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.base-container {
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100vh - #{$header-height});
+  padding: 20px;
+  background-color: #fff;
+}
