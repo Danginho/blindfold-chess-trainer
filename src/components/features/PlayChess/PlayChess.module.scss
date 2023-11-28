@@ -1,0 +1,28 @@
+@import "../../../sass/mixins";
+@import "../../../sass/variables";
+
+.container {
+  width: 100%;
+  margin: auto;
+  max-width: $max-container-width;
+  display: grid;
+  padding: 1.5rem;
+  grid-template-columns: 6fr 4fr;
+  gap: 2.4rem;
+  background-color: antiquewhite;
+  box-shadow: 5px 2px 2px $box-shadow-color;
+
+  @include for-mobile {
+    @include flex-center;
+  }
+
+  .chessboard {
+    grid-column: 1;
+    background-color: #fff;
+  }
+
+  .movehistory {
+    grid-column: 2;
+    background-color: aquamarine;
+  }
+}

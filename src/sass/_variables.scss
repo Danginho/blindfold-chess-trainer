@@ -17,6 +17,12 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
 $font-size: 16px;
 $heading-font-weight: bold;
 
-$header-height: 30px;
+$header-height: 60px;
 $border-color: $neutral-dark;
 $box-shadow-color: rgba($primary-dark, 0.25);
+
+$breakpoint-mobile: 900px;
+$breakpoint-tablet: 1200px;
+
+// maxes
+$max-container-width: 1250px;

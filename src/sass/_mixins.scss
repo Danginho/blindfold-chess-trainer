@@ -8,3 +8,16 @@
 @mixin transition($property: all, $duration: 300ms, $timing: ease) {
   transition: $property $duration $timing;
 }
+
+// Media queries
+@mixin for-mobile {
+  @media (max-width: $breakpoint-mobile) {
+    @content;
+  }
+}
+
+@mixin for-tablet {
+  @media (max-width: $breakpoint-tablet) {
+    @content;
+  }
+}
