@@ -9,8 +9,8 @@
   padding: 1.5rem;
   grid-template-columns: 6fr 4fr;
   gap: 2.4rem;
-  background-color: antiquewhite;
-  box-shadow: 5px 2px 2px $box-shadow-color;
+  // background-color: antiquewhite;
+  // box-shadow: 5px 2px 2px $box-shadow-color;
 
   @include for-mobile {
     @include flex-center;

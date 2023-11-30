@@ -1,11 +1,11 @@
 @import "../../../sass//variables";
 
 .game-result-card {
-  background-color: $background-color;
+  //   background-color: $background-color;
   color: $text-color;
   padding: $tab-padding;
   border-radius: $move-item-border-radius;
-  box-shadow: $move-item-box-shadow;
+  //   box-shadow: 0 0 6px 1px inset $color-primary-dark;
   text-align: center;
   margin: $tab-margin;
 }

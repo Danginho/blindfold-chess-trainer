@@ -6,12 +6,19 @@
   padding: 20px;
   background-color: $background-color;
   color: $text-color;
-  box-shadow: 0 4px 8px $box-shadow-color;
+  box-shadow: 0px 5px 12px 5px $box-shadow-color;
   border-radius: 8px;
   font-family: $font-stack;
   height: 100%;
   box-sizing: border-box;
+  overflow-y: auto;
 
+  .MuiTabs-root {
+    height: 100%;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+  }
   .MuiTab-root {
     color: $tab-color;
     font-weight: $tab-font-weight;
@@ -19,10 +26,24 @@
     background-color: $tab-background-color;
     min-width: 80px;
     border-radius: 8px 8px 0 0;
+    border: none;
+    &:hover {
+      cursor: pointer;
+      background-color: $color-primary-light;
+    }
+
     &.Mui-selected {
       color: $tab-selected-color;
-      border: 2px solid $tab-selected-border-color;
+      // border: 2px solid $tab-selected-border-color;
+      box-shadow: 0 1px 3px 1px inset $color-primary-dark;
     }
+  }
+
+  .MuiTabPanel-root {
+    padding: 20px 10px;
+    border-radius: 5px;
+    box-shadow: 0 0 6px 1px inset $color-primary-dark;
+    height: 100%;
   }
 
   .MuiTabs-indicator {

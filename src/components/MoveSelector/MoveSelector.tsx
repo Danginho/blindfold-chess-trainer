@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef, useContext } from "react";
+import RingLoader from "react-spinners/RingLoader";
 import { GameContext } from "../common/ChessBoard/GameContext";
 import { MoveInput } from "./MoveInput/MoveInput";
 import { MoveList } from "./MoveList/MoveList";
@@ -33,6 +34,10 @@ export const MoveSelector = (props: IMoveSelectorProps) => {
         availableMoves={availableMoves}
         className="move-input"
       />
+
+      {isEngineTurn(game.turn()) && (
+        <RingLoader className="spinner" color="#ccc" />
+      )}
       {showLegalMoves && !isEngineTurn(game.turn()) && (
         <MoveList
           availableMoves={availableMoves}

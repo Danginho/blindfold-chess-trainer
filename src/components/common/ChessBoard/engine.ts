@@ -5,6 +5,7 @@ class Engine extends Worker {
   private depth: number;
   private thinkingTimeMs: number;
   private moveHistory: string;
+  private moveDelayMs: number;
 
   constructor(scriptUrl: string) {
     super(scriptUrl);
@@ -14,6 +15,7 @@ class Engine extends Worker {
     this.moveHistory = "";
     this.setNewGame();
     this.onmessage = this.handleMessage;
+    this.moveDelayMs = 500;
   }
 
   handleMessage(message: MessageEvent): void {
@@ -24,17 +26,25 @@ class Engine extends Worker {
     );
 
     if (bestMoveMatch) {
-      moveTopic.publish({
-        from: bestMoveMatch[1],
-        to: bestMoveMatch[2],
-        promotion: bestMoveMatch[3],
-      });
+      setTimeout(
+        () =>
+          moveTopic.publish({
+            from: bestMoveMatch[1],
+            to: bestMoveMatch[2],
+            promotion: bestMoveMatch[3],
+          }),
+        500
+      );
     }
   }
 
   setNewGame() {
     this.postMessage(`ucinewgame`);
     this.postMessage(`isready`);
+  }
+
+  setMoveDelay(delayTime: number) {
+    this.moveDelayMs = delayTime;
   }
 
   setSkillLevel(level: number) {

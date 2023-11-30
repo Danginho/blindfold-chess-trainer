@@ -1,7 +1,15 @@
 @import "../../sass/variables";
+@import "../../sass/mixins";
 
 .move-selector {
   padding: $move-selector-padding;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  .spinner {
+    margin: 30px auto;
+  }
 
   .move-list {
     display: flex;

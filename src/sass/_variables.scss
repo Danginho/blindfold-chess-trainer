@@ -1,6 +1,6 @@
 // Base Colors
 $color-primary: #262421;
-$color-secondary: #d3d3d3;
+$color-secondary: #26e048;
 $color-accent-1: adjust-hue($color-primary, 30deg);
 $color-accent-2: adjust-hue($color-primary, -30deg);
 
@@ -11,9 +11,12 @@ $color-neutral-dark: #707070;
 // Derived Colors
 $color-primary-light: lighten($color-primary, 20%);
 $color-primary-dark: darken($color-primary, 20%);
+$color-secondary-light: lighten($color-secondary, 20%);
+$color-secondary-dark: darken($color-secondary, 20%);
 
 // Text and Background Colors
 $text-color: $color-neutral-light;
+$text-color-secondary: $color-primary;
 $background-color: $color-primary;
 
 // Border and Shadow Colors

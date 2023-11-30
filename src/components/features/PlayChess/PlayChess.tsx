@@ -1,4 +1,5 @@
 import { useContext } from "react";
+import { StyledButton } from "../../common/Button/StyledButton";
 import { Board } from "../../common/ChessBoard/Board";
 import { GameContext } from "../../common/ChessBoard/GameContext";
 import GameResultCard from "../../common/GameResultCard/GameResultCard";
@@ -7,13 +8,24 @@ import { MoveSelector } from "../../MoveSelector/MoveSelector";
 import styles from "./PlayChess.module.scss";
 
 export const PlayChess = () => {
-  const { gameStatus, startNewGame, game } = useContext(GameContext);
+  const { gameStatus, setGameStarted, gameStarted, resetGame } =
+    useContext(GameContext);
 
-  const preGameTabs: JSX.Element[] = [<div onClick={startNewGame}>Start</div>];
-  const gameOverTabs = [<GameResultCard />];
-  const gameActiveTabs = [<MoveSelector showLegalMoves />];
+  const preGameTabs: JSX.Element[] = [
+    <StyledButton onClick={() => setGameStarted(true)} text="Start" key="1" />,
+  ];
+  const gameOverTabs = [
+    <div key="1">
+      <GameResultCard />
+      <StyledButton onClick={() => resetGame} text="New Game" />
+    </div>,
+  ];
+  const gameActiveTabs = [
+    <MoveSelector showLegalMoves key="a" />,
+    // <StyledButton onClick={() => resetGame} text="New Game" />,
+  ];
 
-  const gameStarted = game.history().length > 0;
+  // const gameStarted = game.history().length > 0;
 
   const tabs = [
     !gameStarted
@@ -29,7 +41,7 @@ export const PlayChess = () => {
         <Board />
       </div>
       <div className={styles.tabsColumn}>
-        <StyledTabsWrapper>{tabs}</StyledTabsWrapper>
+        <StyledTabsWrapper>{tabs[0]}</StyledTabsWrapper>
       </div>
     </div>
   );

@@ -9,6 +9,7 @@ interface TabsWrapperProps {
 }
 
 export const TabsWrapper: React.FC<TabsWrapperProps> = ({ children }) => {
+  console.log("children:", children);
   return (
     <Tabs defaultValue={0}>
       <TabsList>

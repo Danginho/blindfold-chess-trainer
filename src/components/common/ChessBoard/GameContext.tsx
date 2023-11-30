@@ -11,6 +11,8 @@ interface IGameContext {
   resetGame: React.Dispatch<React.SetStateAction<Chess>>;
   setBlackPlayerType: React.Dispatch<React.SetStateAction<IPlayerType>>;
   setWhitePlayerType: React.Dispatch<React.SetStateAction<IPlayerType>>;
+  gameStarted: boolean;
+  setGameStarted: React.Dispatch<React.SetStateAction<boolean>>;
   gameStatus: IGameStatus;
   isEngineTurn: (colour: IPlayerColour) => boolean;
 }
@@ -39,6 +41,8 @@ export const GameContext = createContext<IGameContext>({
     isStalemate: false,
     isInsufficientMaterial: false,
   },
+  setGameStarted: () => {},
+  gameStarted: false,
   isEngineTurn: () => false,
 });
 
@@ -58,9 +62,9 @@ interface IGameStatus {
 export const GameProvider: React.FC<ProviderProps> = ({ children }) => {
   const [game, setGame] = useState<Chess>(new Chess());
   const [gameLocked, setGameLocked] = useState<boolean>(false);
-  const [whitePlayerType, setWhitePlayerType] = useState<IPlayerType>("human");
-  const [blackPlayerType, setBlackPlayerType] = useState<IPlayerType>("engine");
-  // const [nextMove, setNextMove] = useState<IPlayerType>("engine");
+  const [whitePlayerType, setWhitePlayerType] = useState<IPlayerType>("engine");
+  const [blackPlayerType, setBlackPlayerType] = useState<IPlayerType>("human");
+  const [gameStarted, setGameStarted] = useState<boolean>(false);
   const [gameStatus, setGameStatus] = useState<IGameStatus>({
     isGameOver: game.isGameOver(),
     isDraw: game.isDraw(),
@@ -69,12 +73,6 @@ export const GameProvider: React.FC<ProviderProps> = ({ children }) => {
     isStalemate: game.isStalemate(),
     isInsufficientMaterial: game.isInsufficientMaterial(),
   });
-
-  const gamePosition = game.fen();
-
-  useEffect(() => {
-    console.log("gamePosition changed");
-  }, [gamePosition]);
 
   const isEngineTurn = useCallback(
     (colour: "b" | "w") => {
@@ -87,6 +85,7 @@ export const GameProvider: React.FC<ProviderProps> = ({ children }) => {
   );
 
   const makeMoveInUI = (move: IMove) => {
+    if (!gameStarted) return;
     if (!gameLocked) {
       setGame((g) => {
         const gameCopy = Object.assign(
@@ -127,15 +126,17 @@ export const GameProvider: React.FC<ProviderProps> = ({ children }) => {
   }, [game]);
 
   useEffect(() => {
+    if (!gameStarted) return;
     moveTopic.subscribe(makeMoveInUI);
 
     return () => {
       moveTopic.unsubscribe(makeMoveInUI);
     };
-  }, []);
+  }, [gameStarted]);
 
   useEffect(() => {
     const prepareMoveIfEngineTurn = () => {
+      if (!gameStarted) return;
       if (isEngineTurn(game.turn()) && !gameLocked && !gameStatus.isGameOver) {
         setGameLocked(true);
         Stockfish.setMoveHistory(getMoveHistory(game));
@@ -143,10 +144,12 @@ export const GameProvider: React.FC<ProviderProps> = ({ children }) => {
       }
     };
     prepareMoveIfEngineTurn();
-  }, [isEngineTurn, gameLocked, game, gameStatus]);
+  }, [isEngineTurn, gameLocked, game, gameStatus, gameStarted]);
 
   const resetGame = () => {
     setGame(new Chess());
+    // setGameStarted(false);
+    setGameLocked(false);
   };
 
   return (
@@ -159,6 +162,8 @@ export const GameProvider: React.FC<ProviderProps> = ({ children }) => {
         setWhitePlayerType,
         gameStatus,
         isEngineTurn,
+        gameStarted,
+        setGameStarted,
       }}
     >
       {children}

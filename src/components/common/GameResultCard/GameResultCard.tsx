@@ -38,7 +38,7 @@ const GameResultCard: React.FC = () => {
     <div className="game-result-card">
       <h1 className="game-result-title">{resultText}</h1>
       <p className="game-result-method">{methodText}</p>
-      <div onClick={resetGame}>New Game</div>
+      {/* <div onClick={resetGame}>New Game</div> */}
     </div>
   );
 };
