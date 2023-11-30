@@ -16,12 +16,6 @@ export class Topic<DataType> {
   }
 
   public publish(data: DataType): void {
-    console.log(
-      "publishing data",
-      data,
-      "to subscribers",
-      this.subscribers.map((s) => s.name)
-    );
     this.subscribers.forEach((subscriber) => subscriber(data));
   }
 }

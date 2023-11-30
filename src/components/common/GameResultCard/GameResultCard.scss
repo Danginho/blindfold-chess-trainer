@@ -1,0 +1,20 @@
+@import "../../../sass//variables";
+
+.game-result-card {
+  background-color: $background-color;
+  color: $text-color;
+  padding: $tab-padding;
+  border-radius: $move-item-border-radius;
+  box-shadow: $move-item-box-shadow;
+  text-align: center;
+  margin: $tab-margin;
+}
+
+.game-result-title {
+  font-size: $font-size;
+  font-weight: $heading-font-weight;
+}
+
+.game-result-method {
+  font-size: $tab-font-size;
+}

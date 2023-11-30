@@ -12,6 +12,7 @@ interface IGameContext {
   setBlackPlayerType: React.Dispatch<React.SetStateAction<IPlayerType>>;
   setWhitePlayerType: React.Dispatch<React.SetStateAction<IPlayerType>>;
   gameStatus: IGameStatus;
+  isEngineTurn: (colour: IPlayerColour) => boolean;
 }
 
 export type IPlayerColour = "w" | "b";
@@ -38,6 +39,7 @@ export const GameContext = createContext<IGameContext>({
     isStalemate: false,
     isInsufficientMaterial: false,
   },
+  isEngineTurn: () => false,
 });
 
 interface ProviderProps {
@@ -56,8 +58,9 @@ interface IGameStatus {
 export const GameProvider: React.FC<ProviderProps> = ({ children }) => {
   const [game, setGame] = useState<Chess>(new Chess());
   const [gameLocked, setGameLocked] = useState<boolean>(false);
-  const [whitePlayerType, setWhitePlayerType] = useState<IPlayerType>("engine");
+  const [whitePlayerType, setWhitePlayerType] = useState<IPlayerType>("human");
   const [blackPlayerType, setBlackPlayerType] = useState<IPlayerType>("engine");
+  // const [nextMove, setNextMove] = useState<IPlayerType>("engine");
   const [gameStatus, setGameStatus] = useState<IGameStatus>({
     isGameOver: game.isGameOver(),
     isDraw: game.isDraw(),
@@ -66,6 +69,12 @@ export const GameProvider: React.FC<ProviderProps> = ({ children }) => {
     isStalemate: game.isStalemate(),
     isInsufficientMaterial: game.isInsufficientMaterial(),
   });
+
+  const gamePosition = game.fen();
+
+  useEffect(() => {
+    console.log("gamePosition changed");
+  }, [gamePosition]);
 
   const isEngineTurn = useCallback(
     (colour: "b" | "w") => {
@@ -149,6 +158,7 @@ export const GameProvider: React.FC<ProviderProps> = ({ children }) => {
         setBlackPlayerType,
         setWhitePlayerType,
         gameStatus,
+        isEngineTurn,
       }}
     >
       {children}

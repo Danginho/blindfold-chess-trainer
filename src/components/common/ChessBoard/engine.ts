@@ -23,13 +23,7 @@ class Engine extends Worker {
       /^bestmove ([a-h][1-8])([a-h][1-8])([qrbn])?/
     );
 
-    console.log(data);
-
     if (bestMoveMatch) {
-      console.log(
-        "Making best move:",
-        `${bestMoveMatch[1]} ${bestMoveMatch[2]}`
-      );
       moveTopic.publish({
         from: bestMoveMatch[1],
         to: bestMoveMatch[2],

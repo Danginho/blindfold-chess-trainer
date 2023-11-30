@@ -1,28 +1,78 @@
-$primary-color: #262421;
-$primary-light: lighten($primary-color, 20%);
-$primary-dark: darken($primary-color, 20%);
+// Base Colors
+$color-primary: #262421;
+$color-secondary: #d3d3d3;
+$color-accent-1: adjust-hue($color-primary, 30deg);
+$color-accent-2: adjust-hue($color-primary, -30deg);
 
-$neutral-light: #f5f5f5;
-$neutral-dark: #707070;
+// Neutral Colors
+$color-neutral-light: #f5f5f5;
+$color-neutral-dark: #707070;
 
-$secondary-color: #d3d3d3;
+// Derived Colors
+$color-primary-light: lighten($color-primary, 20%);
+$color-primary-dark: darken($color-primary, 20%);
 
-$text-color: $neutral-light;
-$background-color: $primary-color;
+// Text and Background Colors
+$text-color: $color-neutral-light;
+$background-color: $color-primary;
 
-$accent-color-1: adjust-hue($primary-color, 30deg);
-$accent-color-2: adjust-hue($primary-color, -30deg);
+// Border and Shadow Colors
+$border-color: $color-neutral-dark;
+$box-shadow-color: rgba($color-primary-dark, 0.25);
 
+// Typography
 $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
 $font-size: 16px;
 $heading-font-weight: bold;
+$font-weight-normal: 400;
+$font-weight-bold: 700;
 
+// Spacing and Sizing
 $header-height: 60px;
-$border-color: $neutral-dark;
-$box-shadow-color: rgba($primary-dark, 0.25);
+$max-container-width: 1250px;
+$tab-padding: 10px;
+$tab-margin: 5px;
+$move-list-gap: 10px;
+$move-selector-padding: 15px 0;
+$move-input-margin-bottom: 10px;
 
+// Breakpoints
 $breakpoint-mobile: 900px;
 $breakpoint-tablet: 1200px;
 
-// maxes
-$max-container-width: 1250px;
+// Interaction Colors
+$hover-background-color: $color-primary-light;
+$hover-text-color: $color-primary-dark;
+$transition-duration: 0.3s;
+
+// Button Styles
+$button-background-color: $color-accent-1;
+$button-text-color: $text-color;
+$button-border-radius: 4px;
+
+// Input Styles
+$input-border-color: $color-secondary;
+$input-background-color: $color-neutral-light;
+$input-text-color: $text-color;
+
+// Tab Styles
+$tab-font-size: $font-size;
+$tab-font-weight: $font-weight-bold;
+$tab-color: rgba($text-color, 0.9);
+$tab-selected-color: $text-color;
+$tab-selected-border-color: $tab-selected-color;
+$tab-background-color: transparent;
+
+// Move Item Styles
+$move-item-bg-color: transparent;
+$move-item-border-color: rgba($text-color, 0.9);
+$move-item-border-radius: 5px;
+$move-item-color: $tab-color;
+$move-item-font-family: $font-stack;
+$move-item-font-size: 15px;
+$move-item-font-weight: $font-weight-bold;
+$move-item-padding: 11px 23px;
+$move-item-text-shadow: 0px -1px 0px $color-accent-2;
+$move-item-box-shadow: inset 0px 1px 3px 0px $box-shadow-color;
+$move-item-hover-bg-color: rgba($text-color, 0.09);
+$move-input-hover-bg-color: rgba($tab-color, 0.09);

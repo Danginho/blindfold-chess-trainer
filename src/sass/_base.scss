@@ -16,8 +16,8 @@ h6 {
 }
 
 a {
-  color: $primary-color;
+  color: $color-primary;
   &:hover {
-    color: shade-color($primary-color, 20%);
+    color: shade-color($color-primary, 20%);
   }
 }

@@ -1,0 +1,66 @@
+@import "../../sass/variables";
+
+.move-selector {
+  padding: $move-selector-padding;
+
+  .move-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $move-list-gap;
+
+    .move-list-item-wrapper {
+      height: fit-content;
+
+      .move-list-item {
+        display: inline-block;
+        cursor: pointer;
+        box-shadow: $move-item-box-shadow;
+        background-color: $move-item-bg-color;
+        border-radius: $move-item-border-radius;
+        border: 1px solid $move-item-border-color;
+        color: $move-item-color;
+        font-family: $move-item-font-family;
+        font-size: $move-item-font-size;
+        font-weight: $move-item-font-weight;
+        padding: $move-item-padding;
+        text-decoration: none;
+        text-shadow: $move-item-text-shadow;
+
+        &:hover {
+          background-color: $move-item-hover-bg-color;
+        }
+
+        &:active {
+          position: relative;
+          top: 1px;
+        }
+      }
+    }
+  }
+
+  .move-input {
+    width: 100%;
+    box-sizing: border-box;
+    cursor: text;
+    margin-bottom: $move-input-margin-bottom;
+    box-shadow: $move-item-box-shadow;
+    background-color: $move-item-bg-color;
+    border-radius: $move-item-border-radius;
+    border: 1px solid $move-item-border-color;
+    color: $move-item-color;
+    font-family: $move-item-font-family;
+    font-size: $move-item-font-size;
+    font-weight: $move-item-font-weight;
+    padding: $move-item-padding;
+    text-decoration: none;
+    text-shadow: $move-item-text-shadow;
+
+    &:hover {
+      background-color: $move-input-hover-bg-color;
+    }
+
+    &:focus {
+      outline: none;
+    }
+  }
+}
