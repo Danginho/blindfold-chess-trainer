@@ -5,6 +5,7 @@ class Engine extends Worker {
   private depth: number;
   private thinkingTimeMs: number;
   private moveHistory: string;
+  private moveDelayMs: number;
 
   constructor(scriptUrl: string) {
     super(scriptUrl);
@@ -14,6 +15,7 @@ class Engine extends Worker {
     this.moveHistory = "";
     this.setNewGame();
     this.onmessage = this.handleMessage;
+    this.moveDelayMs = 500;
   }
 
   handleMessage(message: MessageEvent): void {
@@ -23,24 +25,26 @@ class Engine extends Worker {
       /^bestmove ([a-h][1-8])([a-h][1-8])([qrbn])?/
     );
 
-    console.log(data);
-
     if (bestMoveMatch) {
-      console.log(
-        "Making best move:",
-        `${bestMoveMatch[1]} ${bestMoveMatch[2]}`
+      setTimeout(
+        () =>
+          moveTopic.publish({
+            from: bestMoveMatch[1],
+            to: bestMoveMatch[2],
+            promotion: bestMoveMatch[3],
+          }),
+        500
       );
-      moveTopic.publish({
-        from: bestMoveMatch[1],
-        to: bestMoveMatch[2],
-        promotion: bestMoveMatch[3],
-      });
     }
   }
 
   setNewGame() {
     this.postMessage(`ucinewgame`);
     this.postMessage(`isready`);
+  }
+
+  setMoveDelay(delayTime: number) {
+    this.moveDelayMs = delayTime;
   }
 
   setSkillLevel(level: number) {
