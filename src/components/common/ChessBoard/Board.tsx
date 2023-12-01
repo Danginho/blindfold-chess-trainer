@@ -5,7 +5,8 @@ import { GameContext } from "./GameContext";
 import { moveTopic } from "./moveTopic";
 
 export const Board = () => {
-  const { game } = useContext(GameContext);
+  const { game, isEngineTurn, whitePlayerType, blackPlayerType } =
+    useContext(GameContext);
   const isBlindfoldMode = false;
 
   const onDrop = (
@@ -44,6 +45,21 @@ export const Board = () => {
   const darkSquareColour = isBlindfoldMode ? "#47523b" : "#779952";
   const lightSquareColour = isBlindfoldMode ? "#898a7e" : "#edeed1";
 
+  const calculateBoardOrientation = () => {
+    const turn = game.turn();
+    if (
+      [whitePlayerType, blackPlayerType].every((player) => player === "human")
+    ) {
+      return turn === "w" ? "white" : "black";
+    } else if (whitePlayerType === "human" && blackPlayerType === "engine") {
+      return "white";
+    } else if (whitePlayerType === "engine" && blackPlayerType === "human") {
+      return "black";
+    } else {
+      return "white";
+    }
+  };
+
   return (
     <Chessboard
       id="Configurable Board"
@@ -57,6 +73,7 @@ export const Board = () => {
       customDropSquareStyle={{
         boxShadow: "inset 0 0 1px 6px rgba(255,255,255,0.75)",
       }}
+      boardOrientation={calculateBoardOrientation()}
       onArrowsChange={function noRefCheck() {}}
       onDragOverSquare={function noRefCheck() {}}
       onMouseOutSquare={function noRefCheck() {}}

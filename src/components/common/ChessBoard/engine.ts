@@ -10,8 +10,8 @@ class Engine extends Worker {
   constructor(scriptUrl: string) {
     super(scriptUrl);
     this.skillLevel = 1;
-    this.depth = 12;
-    this.thinkingTimeMs = 500;
+    this.depth = 7;
+    this.thinkingTimeMs = 600;
     this.moveHistory = "";
     this.setNewGame();
     this.onmessage = this.handleMessage;
@@ -33,7 +33,7 @@ class Engine extends Worker {
             to: bestMoveMatch[2],
             promotion: bestMoveMatch[3],
           }),
-        500
+        this.moveDelayMs
       );
     }
   }

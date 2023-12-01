@@ -15,6 +15,8 @@ interface IGameContext {
   setGameStarted: React.Dispatch<React.SetStateAction<boolean>>;
   gameStatus: IGameStatus;
   isEngineTurn: (colour: IPlayerColour) => boolean;
+  whitePlayerType: IPlayerType;
+  blackPlayerType: IPlayerType;
 }
 
 export type IPlayerColour = "w" | "b";
@@ -44,6 +46,8 @@ export const GameContext = createContext<IGameContext>({
   setGameStarted: () => {},
   gameStarted: false,
   isEngineTurn: () => false,
+  whitePlayerType: "human",
+  blackPlayerType: "human",
 });
 
 interface ProviderProps {
@@ -62,7 +66,7 @@ interface IGameStatus {
 export const GameProvider: React.FC<ProviderProps> = ({ children }) => {
   const [game, setGame] = useState<Chess>(new Chess());
   const [gameLocked, setGameLocked] = useState<boolean>(false);
-  const [whitePlayerType, setWhitePlayerType] = useState<IPlayerType>("engine");
+  const [whitePlayerType, setWhitePlayerType] = useState<IPlayerType>("human");
   const [blackPlayerType, setBlackPlayerType] = useState<IPlayerType>("human");
   const [gameStarted, setGameStarted] = useState<boolean>(false);
   const [gameStatus, setGameStatus] = useState<IGameStatus>({
@@ -164,6 +168,8 @@ export const GameProvider: React.FC<ProviderProps> = ({ children }) => {
         isEngineTurn,
         gameStarted,
         setGameStarted,
+        whitePlayerType,
+        blackPlayerType,
       }}
     >
       {children}

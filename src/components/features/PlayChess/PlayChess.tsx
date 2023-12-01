@@ -8,6 +8,9 @@ import { MoveSelector } from "../../MoveSelector/MoveSelector";
 import styles from "./PlayChess.module.scss";
 
 export const PlayChess = () => {
+  // const { engine } = useContext(EngineContext);
+  console.log("Rendered");
+  // Will be queued and sent to the worker once initialized
   const { gameStatus, setGameStarted, gameStarted, resetGame } =
     useContext(GameContext);
 
@@ -34,7 +37,6 @@ export const PlayChess = () => {
       ? gameOverTabs
       : gameActiveTabs,
   ];
-
   return (
     <div className={styles.container}>
       <div className={styles.chessboard}>
